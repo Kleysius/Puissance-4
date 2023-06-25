@@ -4,9 +4,15 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
     background-color: #0B0B1C;
     color: #fafafa;
     font-family: 'Poppins', sans-serif;
@@ -67,9 +73,10 @@ h1 {
 }
 
 .container {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
 }
 
 .grid {
@@ -106,6 +113,7 @@ h1 {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin: auto;
     display: flex;
     border-radius: 10px;
     box-shadow: 0px 0px 20px 5px #ca5a41;
@@ -245,16 +253,10 @@ h1 {
     text-shadow: 0px 0px 10px rgb(56, 211, 17);
 }
 
-@media(max-width : 900px) {
+@media screen and (max-width : 980px) {
 
     h1 {
         font-size: 40px;
-    }
-
-    .container {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
     }
 
     .grid {
@@ -270,10 +272,8 @@ h1 {
     }
 
     .scoreboard {
-        display: flex;
         height: 360px;
         width: 220px;
-        text-align: center;
     }
 
     .scoreboard h2 {
@@ -313,5 +313,12 @@ h1 {
         font-size: 26px;
         color: #0fdd32;
         text-shadow: 0px 0px 10px rgb(56, 211, 17);
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 }
