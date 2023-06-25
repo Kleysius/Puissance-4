@@ -317,8 +317,36 @@ h1 {
 }
 
 @media screen and (max-width : 768px) {
+    body {
+        height: auto;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .scoreboard {
+        height: 250px;
+        width: 230px;
+    }
+
     .container {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+
+    .grid {
+        height: 270px;
+        width: 300px;
+        gap: 5px;
+    }
+
+    .cell {
+        height: 35px;
+        width: 35px;
+    }
+
+    .vsCpu button {
+        height: 40px;
     }
 }
