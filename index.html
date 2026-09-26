@@ -1,79 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Puissance 4 néon : jouez à deux ou défiez une IA à 4 niveaux.">
+    <meta name="theme-color" content="#140a24">
     <title>Puissance 4</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23241046'/%3E%3Ccircle cx='10' cy='21' r='6' fill='%23ff2e63'/%3E%3Ccircle cx='22' cy='21' r='6' fill='%23ffd23f'/%3E%3Ccircle cx='22' cy='9' r='5' fill='%23ff2e63'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
-    <h1>Puissance 4</h1>
-    <div class="container">
-        <div class="grid">
-            <div class="cell" id="cell-1" onclick="play(this)"></div>
-            <div class="cell" id="cell-2" onclick="play(this)"></div>
-            <div class="cell" id="cell-3" onclick="play(this)"></div>
-            <div class="cell" id="cell-4" onclick="play(this)"></div>
-            <div class="cell" id="cell-5" onclick="play(this)"></div>
-            <div class="cell" id="cell-6" onclick="play(this)"></div>
-            <div class="cell" id="cell-7" onclick="play(this)"></div>
-            <div class="cell" id="cell-8" onclick="play(this)"></div>
-            <div class="cell" id="cell-9" onclick="play(this)"></div>
-            <div class="cell" id="cell-10" onclick="play(this)"></div>
-            <div class="cell" id="cell-11" onclick="play(this)"></div>
-            <div class="cell" id="cell-12" onclick="play(this)"></div>
-            <div class="cell" id="cell-13" onclick="play(this)"></div>
-            <div class="cell" id="cell-14" onclick="play(this)"></div>
-            <div class="cell" id="cell-15" onclick="play(this)"></div>
-            <div class="cell" id="cell-16" onclick="play(this)"></div>
-            <div class="cell" id="cell-17" onclick="play(this)"></div>
-            <div class="cell" id="cell-18" onclick="play(this)"></div>
-            <div class="cell" id="cell-19" onclick="play(this)"></div>
-            <div class="cell" id="cell-20" onclick="play(this)"></div>
-            <div class="cell" id="cell-21" onclick="play(this)"></div>
-            <div class="cell" id="cell-22" onclick="play(this)"></div>
-            <div class="cell" id="cell-23" onclick="play(this)"></div>
-            <div class="cell" id="cell-24" onclick="play(this)"></div>
-            <div class="cell" id="cell-25" onclick="play(this)"></div>
-            <div class="cell" id="cell-26" onclick="play(this)"></div>
-            <div class="cell" id="cell-27" onclick="play(this)"></div>
-            <div class="cell" id="cell-28" onclick="play(this)"></div>
-            <div class="cell" id="cell-29" onclick="play(this)"></div>
-            <div class="cell" id="cell-30" onclick="play(this)"></div>
-            <div class="cell" id="cell-31" onclick="play(this)"></div>
-            <div class="cell" id="cell-32" onclick="play(this)"></div>
-            <div class="cell" id="cell-33" onclick="play(this)"></div>
-            <div class="cell" id="cell-34" onclick="play(this)"></div>
-            <div class="cell" id="cell-35" onclick="play(this)"></div>
-            <div class="cell" id="cell-36" onclick="play(this)"></div>
-            <div class="cell" id="cell-37" onclick="play(this)"></div>
-            <div class="cell" id="cell-38" onclick="play(this)"></div>
-            <div class="cell" id="cell-39" onclick="play(this)"></div>
-            <div class="cell" id="cell-40" onclick="play(this)"></div>
-            <div class="cell" id="cell-41" onclick="play(this)"></div>
-            <div class="cell" id="cell-42" onclick="play(this)"></div>
-        </div>
-        <div class="scoreboard">
-            <h2>Tableau de score</h2>
-            <p>Joueur Rouge
-            <div class="score-player-red"></div>
-            </p>
-            <p>Joueur Jaune
-            <div class="score-player-yellow"></div>
-            </p>
-            <div class="vsCpu">
-                <button onclick="chooseMode()">Jouer contre l'ordi</button>
+<body data-theme="sunset">
+    <!-- Icônes -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
+        <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4z" /><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></symbol>
+        <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4z" /><path d="M17 9.5l5 5M22 9.5l-5 5" /></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="13" r="5" /><path d="M3 18h18M5 21h14M12 3v3M4.9 6.4l1.8 1.8M19.1 6.4l-1.8 1.8" /></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></symbol>
+        <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></symbol>
+        <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></symbol>
+        <symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7" /><path d="M20 4v5h-5" /></symbol>
+        <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3" /><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5" /></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><circle cx="17" cy="9" r="2.5" /><path d="M17 14.5a4.5 4.5 0 0 1 4.5 4.5" /></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+        <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8z" /></symbol>
+    </svg>
+
+    <div class="backdrop" aria-hidden="true">
+        <div class="backdrop__img"></div>
+        <div class="backdrop__floor"></div>
+        <div class="backdrop__fireflies"></div>
+    </div>
+
+    <header class="topbar">
+        <h1 class="logo" aria-label="Puissance 4">Puissance<span class="logo__four">4</span></h1>
+        <nav class="topbar__actions" aria-label="Réglages">
+            <button class="icon-btn" id="btn-theme" type="button" aria-label="Changer de thème" title="Thème (T)">
+                <svg><use href="#i-moon" /></svg>
+            </button>
+            <button class="icon-btn" id="btn-sound" type="button" aria-label="Couper le son" aria-pressed="true" title="Son (M)">
+                <svg><use href="#i-sound" /></svg>
+            </button>
+            <button class="icon-btn" id="btn-menu" type="button" aria-label="Menu et options" title="Menu (Échap)">
+                <svg><use href="#i-menu" /></svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="arena">
+        <section class="player player--red" data-player="1" aria-label="Joueur rouge">
+            <div class="player__disc" aria-hidden="true"></div>
+            <div class="player__info">
+                <p class="player__name">Rouge</p>
+                <p class="player__turn">À toi de jouer</p>
             </div>
-        </div>
-    </div>
-    <div class="result"></div>
-    <div class="reset-button">
-        <button onclick="playAgain()">Rejouer</button>
-    </div>
+            <p class="player__score" aria-label="Score"><span>0</span></p>
+        </section>
+
+        <section class="stage">
+            <div class="board-area" id="board-area" style="--col: 3">
+                <div class="lane" aria-hidden="true">
+                    <div class="ghost"></div>
+                </div>
+                <div class="board">
+                    <div class="board__highlight" aria-hidden="true"></div>
+                    <div class="board__discs" id="discs"></div>
+                    <div class="board__plate" aria-hidden="true"></div>
+                    <svg class="board__win" id="win-lines" viewBox="0 0 7 6" aria-hidden="true"></svg>
+                </div>
+                <div class="hits" id="hits" role="group" aria-label="Colonnes du plateau"></div>
+
+                <div class="result" id="result" hidden>
+                    <div class="result__card" role="dialog" aria-modal="false" aria-labelledby="result-title">
+                        <button class="icon-btn icon-btn--ghost result__close" id="result-close" type="button" aria-label="Voir le plateau">
+                            <svg><use href="#i-close" /></svg>
+                        </button>
+                        <div class="result__badge" aria-hidden="true"><svg><use href="#i-crown" /></svg></div>
+                        <h2 class="result__title" id="result-title">Victoire !</h2>
+                        <p class="result__text" id="result-text"></p>
+                        <div class="result__actions">
+                            <button class="btn btn--primary" id="btn-rematch" type="button">Revanche</button>
+                            <button class="btn" id="btn-result-menu" type="button">Menu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="board-feet" aria-hidden="true"><span></span><span></span></div>
+
+            <p class="status" id="status" aria-live="polite"></p>
+
+            <div class="controls">
+                <button class="btn" id="btn-undo" type="button" title="Annuler (U)">
+                    <svg><use href="#i-undo" /></svg><span>Annuler</span>
+                </button>
+                <button class="btn" id="btn-hint" type="button" title="Indice (H)">
+                    <svg><use href="#i-bulb" /></svg><span>Indice</span>
+                </button>
+                <button class="btn" id="btn-restart" type="button" title="Nouvelle partie (R)">
+                    <svg><use href="#i-restart" /></svg><span>Rejouer</span>
+                </button>
+            </div>
+            <p class="draws" id="draws"></p>
+        </section>
+
+        <section class="player player--yellow" data-player="2" aria-label="Joueur jaune">
+            <div class="player__disc" aria-hidden="true"></div>
+            <div class="player__info">
+                <p class="player__name">Jaune</p>
+                <p class="player__turn">À toi de jouer</p>
+            </div>
+            <p class="player__score" aria-label="Score"><span>0</span></p>
+        </section>
+    </main>
+
+    <footer class="shortcuts" aria-label="Raccourcis clavier">
+        <span><kbd>←</kbd><kbd>→</kbd> viser</span>
+        <span><kbd>Entrée</kbd> lâcher</span>
+        <span><kbd>1</kbd>–<kbd>7</kbd> colonne</span>
+        <span><kbd>U</kbd> annuler</span>
+        <span><kbd>H</kbd> indice</span>
+        <span><kbd>R</kbd> rejouer</span>
+    </footer>
+
+    <dialog class="menu" id="menu" aria-labelledby="menu-title">
+        <form method="dialog" class="menu__form" id="menu-form">
+            <h2 class="menu__title" id="menu-title">Nouvelle partie</h2>
+
+            <fieldset class="field">
+                <legend>Mode de jeu</legend>
+                <div class="segmented">
+                    <label>
+                        <input type="radio" name="mode" value="ai" checked>
+                        <span><svg><use href="#i-bot" /></svg>Contre l'IA</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="mode" value="pvp">
+                        <span><svg><use href="#i-users" /></svg>2 joueurs</span>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="field" id="field-level">
+                <legend>Niveau de l'IA</legend>
+                <div class="chips">
+                    <label><input type="radio" name="level" value="easy"><span>Facile</span></label>
+                    <label><input type="radio" name="level" value="medium" checked><span>Moyen</span></label>
+                    <label><input type="radio" name="level" value="hard"><span>Difficile</span></label>
+                    <label><input type="radio" name="level" value="expert"><span>Expert</span></label>
+                </div>
+                <p class="field__hint" id="level-hint"></p>
+            </fieldset>
+
+            <fieldset class="field">
+                <legend>Joueurs</legend>
+                <div class="names">
+                    <label class="name name--red">
+                        <span class="name__dot" aria-hidden="true"></span>
+                        <input type="text" name="red" maxlength="14" placeholder="Rouge" autocomplete="off" aria-label="Nom du joueur rouge">
+                    </label>
+                    <label class="name name--yellow" id="name-yellow">
+                        <span class="name__dot" aria-hidden="true"></span>
+                        <input type="text" name="yellow" maxlength="14" placeholder="Jaune" autocomplete="off" aria-label="Nom du joueur jaune">
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="menu__actions">
+                <button class="btn btn--primary btn--wide" type="submit" value="play" autofocus>Jouer</button>
+                <button class="btn btn--link" type="button" id="btn-reset-scores">Remettre les scores à zéro</button>
+            </div>
+            <button class="icon-btn icon-btn--ghost menu__close" type="button" id="menu-close" aria-label="Fermer le menu">
+                <svg><use href="#i-close" /></svg>
+            </button>
+        </form>
+    </dialog>
+
+    <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+    <script src="./assets/javascript/engine.js"></script>
+    <script src="./assets/javascript/sound.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
-<script src="./assets/javascript/script.js"></script>
 
 </html>
